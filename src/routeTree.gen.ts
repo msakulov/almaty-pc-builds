@@ -9,12 +9,48 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as ServicesRouteImport } from './routes/services'
+import { Route as PricesRouteImport } from './routes/prices'
+import { Route as ContactsRouteImport } from './routes/contacts'
+import { Route as ConstructorRouteImport } from './routes/constructor'
+import { Route as CareersRouteImport } from './routes/careers'
 import { Route as BuildsRouteImport } from './routes/builds'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BuildsIndexRouteImport } from './routes/builds.index'
 import { Route as BuildsTypeRouteImport } from './routes/builds.$type'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesRoute = ServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PricesRoute = PricesRouteImport.update({
+  id: '/prices',
+  path: '/prices',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactsRoute = ContactsRouteImport.update({
+  id: '/contacts',
+  path: '/contacts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConstructorRoute = ConstructorRouteImport.update({
+  id: '/constructor',
+  path: '/constructor',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CareersRoute = CareersRouteImport.update({
+  id: '/careers',
+  path: '/careers',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BuildsRoute = BuildsRouteImport.update({
   id: '/builds',
   path: '/builds',
@@ -45,12 +81,24 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/builds': typeof BuildsRouteWithChildren
+  '/careers': typeof CareersRoute
+  '/constructor': typeof ConstructorRoute
+  '/contacts': typeof ContactsRoute
+  '/prices': typeof PricesRoute
+  '/services': typeof ServicesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/builds/$type': typeof BuildsTypeRoute
   '/builds/': typeof BuildsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/careers': typeof CareersRoute
+  '/constructor': typeof ConstructorRoute
+  '/contacts': typeof ContactsRoute
+  '/prices': typeof PricesRoute
+  '/services': typeof ServicesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/builds/$type': typeof BuildsTypeRoute
   '/builds': typeof BuildsIndexRoute
 }
@@ -59,25 +107,112 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/builds': typeof BuildsRouteWithChildren
+  '/careers': typeof CareersRoute
+  '/constructor': typeof ConstructorRoute
+  '/contacts': typeof ContactsRoute
+  '/prices': typeof PricesRoute
+  '/services': typeof ServicesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/builds/$type': typeof BuildsTypeRoute
   '/builds/': typeof BuildsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/builds' | '/builds/$type' | '/builds/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/builds'
+    | '/careers'
+    | '/constructor'
+    | '/contacts'
+    | '/prices'
+    | '/services'
+    | '/sitemap.xml'
+    | '/builds/$type'
+    | '/builds/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/builds/$type' | '/builds'
-  id: '__root__' | '/' | '/about' | '/builds' | '/builds/$type' | '/builds/'
+  to:
+    | '/'
+    | '/about'
+    | '/careers'
+    | '/constructor'
+    | '/contacts'
+    | '/prices'
+    | '/services'
+    | '/sitemap.xml'
+    | '/builds/$type'
+    | '/builds'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/builds'
+    | '/careers'
+    | '/constructor'
+    | '/contacts'
+    | '/prices'
+    | '/services'
+    | '/sitemap.xml'
+    | '/builds/$type'
+    | '/builds/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   BuildsRoute: typeof BuildsRouteWithChildren
+  CareersRoute: typeof CareersRoute
+  ConstructorRoute: typeof ConstructorRoute
+  ContactsRoute: typeof ContactsRoute
+  PricesRoute: typeof PricesRoute
+  ServicesRoute: typeof ServicesRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services': {
+      id: '/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/prices': {
+      id: '/prices'
+      path: '/prices'
+      fullPath: '/prices'
+      preLoaderRoute: typeof PricesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contacts': {
+      id: '/contacts'
+      path: '/contacts'
+      fullPath: '/contacts'
+      preLoaderRoute: typeof ContactsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/constructor': {
+      id: '/constructor'
+      path: '/constructor'
+      fullPath: '/constructor'
+      preLoaderRoute: typeof ConstructorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/careers': {
+      id: '/careers'
+      path: '/careers'
+      fullPath: '/careers'
+      preLoaderRoute: typeof CareersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/builds': {
       id: '/builds'
       path: '/builds'
@@ -133,6 +268,12 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   BuildsRoute: BuildsRouteWithChildren,
+  CareersRoute: CareersRoute,
+  ConstructorRoute: ConstructorRoute,
+  ContactsRoute: ContactsRoute,
+  PricesRoute: PricesRoute,
+  ServicesRoute: ServicesRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
