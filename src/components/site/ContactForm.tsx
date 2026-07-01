@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useServerFn } from "@tanstack/react-start";
 import { submitLead } from "@/lib/leads.functions";
@@ -15,6 +15,14 @@ export function ContactForm({ source = "contact_form", buildConfig, compact }: P
   const submit = useServerFn(submitLead);
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({ name: "", phone: "", email: "", message: "" });
+  const [captchaAnswer, setCaptchaAnswer] = useState("");
+  const [captchaSeed, setCaptchaSeed] = useState(0);
+  const captcha = useMemo(() => {
+    // Deterministic on SSR (seed=0 → 3+4). Regenerated on client after mount / after submit.
+    const a = ((captchaSeed * 9301 + 49297) % 233280) % 9 + 1;
+    const b = ((captchaSeed * 4801 + 12345) % 233280) % 9 + 1;
+    return { a: captchaSeed === 0 ? 3 : a, b: captchaSeed === 0 ? 4 : b };
+  }, [captchaSeed]);
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
