@@ -1,0 +1,198 @@
+import type { Dict } from "./ru";
+
+export const en: Dict = {
+  brand: "NEONRIG",
+  tagline: "Computers & components in Almaty",
+  nav: {
+    home: "Home",
+    about: "About",
+    builds: "Builds",
+    constructor: "Configurator",
+    prices: "Prices",
+    services: "Services",
+    careers: "Careers",
+    contacts: "Contacts",
+  },
+  cta: {
+    order: "Order",
+    consult: "Get a quote",
+    configure: "Build a PC",
+    viewAll: "View all",
+    submit: "Send request",
+    sending: "Sending...",
+  },
+  home: {
+    hero: {
+      badge: "Almaty · Assembly · 2-year warranty",
+      title: "PCs built\nto outrun time",
+      subtitle:
+        "From office stations to esports monsters. Components, configuration, delivery across Kazakhstan.",
+      primary: "Build a PC",
+      secondary: "Ready builds",
+    },
+    features: {
+      title: "Why NEONRIG",
+      items: [
+        { title: "Genuine components", desc: "Direct supply chain, every part validated at assembly." },
+        { title: "Assembled in 24h", desc: "Standard builds next day. Custom rigs up to 3 days." },
+        { title: "Warranty up to 3 years", desc: "On every build plus in-house service in Almaty." },
+        { title: "Stress-tested", desc: "Every PC passes CPU, GPU and memory stress benchmarks." },
+      ],
+    },
+    catalog: {
+      title: "Builds by purpose",
+      subtitle: "Pick a category — or design your own in the configurator",
+    },
+    cta: {
+      title: "Not sure what to pick?",
+      desc: "Drop us a line — we'll spec a rig for your workload and budget.",
+    },
+  },
+  about: {
+    title: "About us",
+    lead: "NEONRIG is a team of engineers and enthusiasts from Almaty. Building PCs since 2018.",
+    stats: [
+      { value: "5000+", label: "PCs assembled" },
+      { value: "7 years", label: "On the market" },
+      { value: "24h", label: "Average build time" },
+      { value: "98%", label: "Happy customers" },
+    ],
+    values: {
+      title: "Our principles",
+      items: [
+        { title: "Transparency", desc: "We show every part and explain the choice." },
+        { title: "Quality", desc: "Only genuine, trusted brands and partners." },
+        { title: "Service", desc: "Post-purchase support, upgrades and diagnostics." },
+      ],
+    },
+  },
+  builds: {
+    title: "PC builds",
+    subtitle: "Ready configurations for every workload",
+    from: "from",
+    view: "Details",
+    categories: {
+      office: {
+        name: "Office",
+        short: "Docs & everyday tasks",
+        desc: "Quiet, reliable PCs for documents, spreadsheets, browsers and video calls.",
+        for: ["Office apps", "Document work", "Zoom, Teams", "Multitasking up to 8 tabs"],
+        builds: [
+          { name: "Office Start", price: 260000, cpu: "Intel Core i3-14100", gpu: "UHD 730", ram: "16 GB DDR4", ssd: "500 GB NVMe" },
+          { name: "Office Pro", price: 390000, cpu: "Intel Core i5-14400", gpu: "UHD 730", ram: "32 GB DDR5", ssd: "1 TB NVMe" },
+        ],
+      },
+      study: {
+        name: "Study",
+        short: "For school & university",
+        desc: "Versatile PCs for studying, coding, light gaming and editing.",
+        for: ["Programming", "Online courses", "Light gaming", "Adobe Photoshop"],
+        builds: [
+          { name: "Study Basic", price: 340000, cpu: "AMD Ryzen 5 5600", gpu: "GTX 1650", ram: "16 GB DDR4", ssd: "500 GB NVMe" },
+          { name: "Study Plus", price: 490000, cpu: "AMD Ryzen 5 7600", gpu: "RTX 4060", ram: "32 GB DDR5", ssd: "1 TB NVMe" },
+        ],
+      },
+      gaming: {
+        name: "Work & Gaming",
+        short: "For creators & esports",
+        desc: "High-power all-rounders: 2K/4K gaming, streaming, editing, 3D.",
+        for: ["AAA gaming 2K/4K", "OBS streaming", "Premiere, DaVinci", "Blender, Unity"],
+        builds: [
+          { name: "Rig Ultra", price: 890000, cpu: "Intel Core i7-14700K", gpu: "RTX 4070 Ti Super", ram: "32 GB DDR5 6400", ssd: "2 TB NVMe Gen4" },
+          { name: "Rig Extreme", price: 1490000, cpu: "Intel Core i9-14900K", gpu: "RTX 4090", ram: "64 GB DDR5 7200", ssd: "4 TB NVMe Gen4" },
+        ],
+      },
+      pro: {
+        name: "Heavy workloads",
+        short: "Render, AI, CAD",
+        desc: "Pro workstations for 3D rendering, machine learning, CAD and simulations.",
+        for: ["3D render, Redshift, V-Ray", "Neural network training", "CAD, SolidWorks", "Virtualization"],
+        builds: [
+          { name: "Workstation Render", price: 2200000, cpu: "AMD Threadripper 7960X", gpu: "RTX 4090", ram: "128 GB DDR5 ECC", ssd: "4 TB NVMe Gen5" },
+          { name: "AI Station Dual", price: 4800000, cpu: "AMD Threadripper Pro 7975WX", gpu: "2× RTX 4090", ram: "256 GB DDR5 ECC", ssd: "8 TB NVMe Gen5" },
+        ],
+      },
+    },
+    detail: {
+      specs: "Specifications",
+      cpu: "CPU",
+      gpu: "GPU",
+      ram: "Memory",
+      ssd: "Storage",
+      goodFor: "Good for",
+      order: "Order this build",
+    },
+    notFound: "Category not found",
+  },
+  constructor: {
+    title: "PC Configurator",
+    subtitle: "Pick your parts — we'll price and build it",
+    parts: {
+      cpu: "CPU",
+      motherboard: "Motherboard",
+      gpu: "GPU",
+      ram: "RAM",
+      storage: "Storage",
+      psu: "PSU",
+      case: "Case",
+      cooling: "Cooling",
+    },
+    total: "Total",
+    reset: "Reset",
+    submit: "Submit configuration",
+    priceLabel: "Price",
+    empty: "Not selected",
+  },
+  prices: {
+    title: "Prices",
+    subtitle: "Transparent pricing for builds and services",
+    tableBuild: "Ready builds",
+    tableService: "Services",
+    category: "Category",
+    from: "From",
+    tenge: "₸",
+  },
+  services: {
+    title: "Services",
+    subtitle: "What we do besides building PCs",
+    items: [
+      { title: "PC assembly", desc: "Custom assembly from your parts or ours.", price: 15000 },
+      { title: "Diagnostics", desc: "Full fault diagnostics, report within 24 hours.", price: 8000 },
+      { title: "Upgrade", desc: "Upgrading CPU, GPU, RAM, SSD, cooling.", price: 12000 },
+      { title: "Cleaning & maintenance", desc: "Dust removal, thermal paste and liquid loop refresh.", price: 10000 },
+      { title: "OS & software install", desc: "Windows/Linux, drivers, optimization, workload software.", price: 6000 },
+      { title: "On-site support", desc: "On-site visits across Almaty, repair and setup.", price: 15000 },
+    ],
+  },
+  careers: {
+    title: "Careers",
+    subtitle: "Join the NEONRIG team",
+    apply: "Apply",
+    vacancies: [
+      { title: "PC assembler", location: "Almaty, office", type: "Full-time", desc: "Assembly of standard and custom PCs, testing, packaging." },
+      { title: "Sales manager", location: "Almaty, office", type: "Full-time", desc: "Client consulting, spec building, CRM." },
+      { title: "Service engineer", location: "Almaty", type: "Full-time / field", desc: "Diagnostics, repair, upgrades, liquid cooling." },
+    ],
+  },
+  contacts: {
+    title: "Contacts",
+    subtitle: "Reach out however you prefer",
+    address: "150 Abay Ave, Almaty",
+    hours: "Mon–Sat: 10:00–20:00, Sun: 12:00–18:00",
+    phone: "+7 (727) 000-00-00",
+    email: "hello@neonrig.kz",
+    formTitle: "Send a request",
+    fields: {
+      name: "Name",
+      phone: "Phone",
+      email: "E-mail (optional)",
+      message: "Message",
+    },
+    success: "Request sent. We'll be in touch within an hour.",
+    error: "Failed to send. Please try again.",
+  },
+  footer: {
+    rights: "All rights reserved",
+    made: "Built with 💜 in Almaty",
+  },
+};
