@@ -22,7 +22,7 @@ export const submitLead = createServerFn({ method: "POST" })
       { auth: { storage: undefined, persistSession: false, autoRefreshToken: false } },
     );
 
-    const insert = await supabase.from("leads").insert({
+    const { error: insertError } = await supabase.from("leads").insert({
       name: data.name,
       phone: data.phone,
       email: data.email ?? null,
@@ -30,10 +30,10 @@ export const submitLead = createServerFn({ method: "POST" })
       source: data.source,
       language: data.language,
       build_config: (data.build_config as never) ?? null,
-    }).select("id").single();
+    });
 
-    if (insert.error) {
-      throw new Error(insert.error.message);
+    if (insertError) {
+      throw new Error(insertError.message);
     }
 
     // Optional: send to Telegram if bot secrets are configured
@@ -58,13 +58,11 @@ export const submitLead = createServerFn({ method: "POST" })
           body: JSON.stringify({ chat_id: chatId, text }),
         });
         telegramSent = resp.ok;
-        if (resp.ok) {
-          await supabase.from("leads").update({ telegram_sent: true }).eq("id", insert.data.id);
-        }
       } catch (err) {
         console.error("telegram send failed", err);
       }
     }
 
-    return { id: insert.data.id, telegramSent };
+    return { telegramSent };
   });
+
