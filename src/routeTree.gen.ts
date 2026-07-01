@@ -9,38 +9,89 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as BuildsRouteImport } from './routes/builds'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BuildsIndexRouteImport } from './routes/builds.index'
+import { Route as BuildsTypeRouteImport } from './routes/builds.$type'
 
+const BuildsRoute = BuildsRouteImport.update({
+  id: '/builds',
+  path: '/builds',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BuildsIndexRoute = BuildsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => BuildsRoute,
+} as any)
+const BuildsTypeRoute = BuildsTypeRouteImport.update({
+  id: '/$type',
+  path: '/$type',
+  getParentRoute: () => BuildsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/builds': typeof BuildsRouteWithChildren
+  '/builds/$type': typeof BuildsTypeRoute
+  '/builds/': typeof BuildsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/builds/$type': typeof BuildsTypeRoute
+  '/builds': typeof BuildsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/builds': typeof BuildsRouteWithChildren
+  '/builds/$type': typeof BuildsTypeRoute
+  '/builds/': typeof BuildsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/about' | '/builds' | '/builds/$type' | '/builds/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/about' | '/builds/$type' | '/builds'
+  id: '__root__' | '/' | '/about' | '/builds' | '/builds/$type' | '/builds/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  BuildsRoute: typeof BuildsRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/builds': {
+      id: '/builds'
+      path: '/builds'
+      fullPath: '/builds'
+      preLoaderRoute: typeof BuildsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +99,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/builds/': {
+      id: '/builds/'
+      path: '/'
+      fullPath: '/builds/'
+      preLoaderRoute: typeof BuildsIndexRouteImport
+      parentRoute: typeof BuildsRoute
+    }
+    '/builds/$type': {
+      id: '/builds/$type'
+      path: '/$type'
+      fullPath: '/builds/$type'
+      preLoaderRoute: typeof BuildsTypeRouteImport
+      parentRoute: typeof BuildsRoute
+    }
   }
 }
 
+interface BuildsRouteChildren {
+  BuildsTypeRoute: typeof BuildsTypeRoute
+  BuildsIndexRoute: typeof BuildsIndexRoute
+}
+
+const BuildsRouteChildren: BuildsRouteChildren = {
+  BuildsTypeRoute: BuildsTypeRoute,
+  BuildsIndexRoute: BuildsIndexRoute,
+}
+
+const BuildsRouteWithChildren =
+  BuildsRoute._addFileChildren(BuildsRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  BuildsRoute: BuildsRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
