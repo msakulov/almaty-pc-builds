@@ -99,7 +99,8 @@ function Index() {
               short: string;
               builds: Array<{ price: number }>;
             };
-            const min = Math.min(...cat.builds.map((b) => b.price));
+            const builds = Array.isArray(cat?.builds) ? cat.builds : [];
+            const min = builds.length ? Math.min(...builds.map((b) => b.price)) : 0;
             return (
               <Link
                 key={c.key}
