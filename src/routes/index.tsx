@@ -12,7 +12,10 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const { t } = useTranslation();
-  const features = t("home.features.items", { returnObjects: true }) as Array<{ title: string; desc: string }>;
+  const featuresRaw = t("home.features.items", { returnObjects: true }) as unknown;
+  const features = Array.isArray(featuresRaw)
+    ? (featuresRaw as Array<{ title: string; desc: string }>)
+    : [];
   const icons = [Shield, Zap, Wrench, Gauge];
 
   const categories = [
